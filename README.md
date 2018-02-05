@@ -81,7 +81,8 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 
 ##### Output:
 
-<img src='data:image/svg+xml;%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%20standalone%3D%22no%22%3F%3E%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%0A%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20version%3D%221.1%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E'>
+
+![./Images/oxyplot.svg](./Images/oxyplot.svg)
 
 
 
