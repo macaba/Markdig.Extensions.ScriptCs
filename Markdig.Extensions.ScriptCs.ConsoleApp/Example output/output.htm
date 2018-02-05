@@ -14,48 +14,56 @@
 </head>
 <body>
 <div class='container'><h1 id="report">Report</h1>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Instantiate the Markdig.Extensions.ScriptCs into the scripting runtime:</p>
+<div class="lang-C# editor-colors"><div style="color:Black;background-color:White;"><pre>
+```ScriptCs
+#r Markdig.Extensions.ScriptCs.dll
+<span style="color:Blue;">using</span> Markdig.Extensions.ScriptCs;
+```
+</pre></div>
+</div>
+<p>This only needs to be done once in your document.</p>
 <h2 id="html">Html</h2>
 <p>This generates some simple HTML from ScriptCs</p>
-<h4 id="output">Output</h4>
-<p>Hello World!</p><h4 id="code">Code</h4>
+<h4 id="code">Code</h4>
 <div class="lang-C# editor-colors"><div style="color:Black;background-color:White;"><pre>
-#load support.csx
 MarkdownDocument.Instance.InsertHtml(<span style="color:#A31515;">&quot;&lt;p&gt;Hello World!&lt;/p&gt;&quot;</span>);
 </pre></div>
 </div>
-<h2 id="markdown" class="pb_before">Markdown</h2>
+<h4 id="output">Output</h4>
+<p>Hello World!</p><h2 id="markdown" class="pb_before">Markdown</h2>
 <p>This generates some simple Markdown from ScriptCs (which is then processed into HTML)</p>
-<h4 id="output-1">Output</h4>
-<p>Hello World!</p>
 <h4 id="code-1">Code</h4>
 <div class="lang-C# editor-colors"><div style="color:Black;background-color:White;"><pre>
-#load support.csx
 MarkdownDocument.Instance.InsertMarkdown(<span style="color:#A31515;">&quot;Hello World!&quot;</span>);
 </pre></div>
 </div>
+<h4 id="output-1">Output</h4>
+<p>Hello World!</p>
 <h2 id="inline" class="pb_before">Inline</h2>
 <p>This uses inline code tags to generate some markdown.</p>
-<h4 id="output-2">Output</h4>
-<p>This is some <em>italic</em> text.</p>
 <h4 id="code-2">Code</h4>
 <pre><code>This is some `ScriptCs MarkdownDocument.Instance.InsertMarkdown(&quot;_italic_&quot;);` text.
 </code></pre>
-<h4 id="output-3">Output</h4>
+<h4 id="output-2">Output</h4>
 <p>This is some <em>italic</em> text.</p>
 <h4 id="code-3">Code</h4>
 <pre><code>This is some `ScriptCs MarkdownDocument.Instance.InsertHtml(&quot;&lt;em&gt;italic&lt;/em&gt;&quot;);` text.
 </code></pre>
+<h4 id="output-3">Output</h4>
+<p>This is some <em>italic</em> text.</p>
 <h2 id="exception-handling" class="pb_before">Exception Handling</h2>
 <p>This generates a ScriptCs exception by using invalid code.</p>
-<h4 id="output-4">Output</h4>
-<pre><code>ScriptCs exception:
-(1,21): error CS0246: The type or namespace name 'FakeModel' could not be found (are you missing a using directive or an assembly reference?)
-</code></pre>
 <h4 id="code-4">Code</h4>
 <div class="lang-C# editor-colors"><div style="color:Black;background-color:White;"><pre>
 <span style="color:Blue;">var</span> fakeModel = <span style="color:Blue;">new</span> FakeModel { Title = <span style="color:#A31515;">&quot;Test&quot;</span> };
 </pre></div>
 </div>
+<h4 id="output-4">Output</h4>
+<pre><code>ScriptCs exception:
+(1,21): error CS0246: The type or namespace name 'FakeModel' could not be found (are you missing a using directive or an assembly reference?)
+</code></pre>
 <h2 id="bootstrap-layout" class="pb_before">Bootstrap Layout</h2>
 <h4 id="simple-content">Simple content</h4>
 <div class="row">
@@ -74,6 +82,18 @@ MarkdownDocument.Instance.InsertMarkdown(<span style="color:#A31515;">&quot;Hell
 </div>
 </div>
 <h2 id="oxyplot" class="pb_before">OxyPlot</h2>
+<h4 id="code-5">Code</h4>
+<div class="lang-C# editor-colors"><div style="color:Black;background-color:White;"><pre>
+#r OxyPlot.dll
+#r System.Runtime.dll
+<span style="color:Blue;">using</span> OxyPlot;
+<span style="color:Blue;">using</span> OxyPlot.Series;
+<span style="color:Blue;">var</span> myModel = <span style="color:Blue;">new</span> PlotModel { Title = <span style="color:#A31515;">&quot;Example 1&quot;</span> };
+myModel.Series.Add(<span style="color:Blue;">new</span> FunctionSeries(Math.Cos, 0, 10, 0.1, <span style="color:#A31515;">&quot;cos(x)&quot;</span>));
+<span style="color:Blue;">var</span> exporter = <span style="color:Blue;">new</span> SvgExporter { Width = 800, Height = 400 };
+MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
+</pre></div>
+</div>
 <h4 id="output-5">Output</h4>
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -173,25 +193,7 @@ MarkdownDocument.Instance.InsertMarkdown(<span style="color:#A31515;">&quot;Hell
   <polygon points="723.502,37.0795 784,37.0795 784,63.1325 723.502,63.1325" style="fill:none;stroke:none;" />
   <text dominant-baseline="hanging" text-anchor="start" transform="translate(751.502,45.0795)" font-family="Segoe UI" font-size="12" font-weight="400" fill="black">cos(x)</text>
   <polyline points="731.502,50.106 747.502,50.106" style="fill:none;stroke:rgb(78,154,6);stroke-width:2" />
-</svg><h4 id="code-5">Code</h4>
-<div class="lang-C# editor-colors"><div style="color:Black;background-color:White;"><pre>
-#load support.csx
-<span style="color:Blue;">var</span> myModel = <span style="color:Blue;">new</span> PlotModel { Title = <span style="color:#A31515;">&quot;Example 1&quot;</span> };
-myModel.Series.Add(<span style="color:Blue;">new</span> FunctionSeries(Math.Cos, 0, 10, 0.1, <span style="color:#A31515;">&quot;cos(x)&quot;</span>));
-<span style="color:Blue;">var</span> exporter = <span style="color:Blue;">new</span> SvgExporter { Width = 800, Height = 400 };
-MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
-</pre></div>
-</div>
-<h3 id="the-content-of-support.csx" class="pb_before">The content of <code>support.csx</code></h3>
-<pre><code>#r Markdig.Extensions.ScriptCs.dll
-#r OxyPlot.dll
-#r System.Runtime.dll
-using Markdig.Extensions.ScriptCs;
-using OxyPlot;
-using OxyPlot.Series;
-</code></pre>
-<p>System.Runtime.dll is required for OxyPlot only.</p>
-<h2 id="ipsum-lorem" class="pb_before">Ipsum Lorem</h2>
+</svg><h2 id="ipsum-lorem" class="pb_before">Ipsum Lorem</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae fermentum dui. Morbi eu scelerisque ligula. Vivamus placerat erat urna, nec dictum lacus varius eu. Ut eu enim quis elit tempor congue quis eu tortor. Duis sed finibus erat. Curabitur venenatis, est quis consectetur porta, eros lacus gravida augue, vitae consequat nibh dui ut urna. Cras at orci quis felis congue volutpat non in mauris. Donec posuere risus felis, et egestas sapien ultrices in. Aliquam elementum imperdiet est, ullamcorper fermentum mauris imperdiet ornare.</p>
 <p>Phasellus erat ex, egestas faucibus tellus vel, volutpat feugiat est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce ornare metus ut risus viverra, ut vulputate nisl ullamcorper. Pellentesque auctor volutpat dictum. Sed vel justo massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce consectetur sit amet est quis aliquam. Cras fermentum blandit justo, sed sagittis felis pharetra at. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque id felis est. Curabitur ac massa at arcu laoreet gravida. Quisque pretium sagittis dignissim. Curabitur consequat eget purus et sollicitudin. Vivamus hendrerit sodales egestas. Ut pretium dui id erat interdum bibendum. Nulla vitae ligula in sem congue pulvinar id in libero.</p>
 <p>Donec efficitur sollicitudin pulvinar. Sed quis diam a nibh scelerisque luctus. Aenean varius ullamcorper vulputate. Pellentesque facilisis rutrum lacus, ut bibendum magna dignissim non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porttitor mauris quis rhoncus blandit. Aliquam ac imperdiet risus. Vestibulum imperdiet dolor eu tortor consectetur sollicitudin. Maecenas malesuada accumsan volutpat. Quisque et elementum ligula.</p>
@@ -210,7 +212,7 @@ using OxyPlot.Series;
 <h2 id="misc" class="pb_before">Misc</h2>
 <h4 id="datetime.utcnow">DateTime.UtcNow</h4>
 <p>The current UTC date-time is:</p>
-05/02/2018 11:37:03</div>
+05/02/2018 11:56:26</div>
 <script src='http://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
 </body>

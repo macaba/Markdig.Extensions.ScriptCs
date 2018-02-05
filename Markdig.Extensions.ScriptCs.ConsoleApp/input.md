@@ -1,66 +1,78 @@
 ﻿# Report
 
+## Prerequisites
+
+Instantiate the Markdig.Extensions.ScriptCs into the scripting runtime:
+
+````C#
+```ScriptCs
+#r Markdig.Extensions.ScriptCs.dll
+using Markdig.Extensions.ScriptCs;
+```
+````
+
+This only needs to be done once in your document.
+
+```ScriptCs
+#r Markdig.Extensions.ScriptCs.dll
+using Markdig.Extensions.ScriptCs;
+```
+
 ## Html
 This generates some simple HTML from ScriptCs
 
-#### Output
-```ScriptCs
-#load support.csx
+#### Code
+```C#
 MarkdownDocument.Instance.InsertHtml("<p>Hello World!</p>");
 ```
 
-#### Code
-```C#
-#load support.csx
+#### Output
+```ScriptCs
 MarkdownDocument.Instance.InsertHtml("<p>Hello World!</p>");
 ```
 
 ## Markdown {.pb_before}
 This generates some simple Markdown from ScriptCs (which is then processed into HTML)
 
-#### Output
-```ScriptCs
-#load support.csx
+#### Code
+```C#
 MarkdownDocument.Instance.InsertMarkdown("Hello World!");
 ```
 
-#### Code
-```C#
-#load support.csx
+#### Output
+```ScriptCs
 MarkdownDocument.Instance.InsertMarkdown("Hello World!");
 ```
 
 ## Inline {.pb_before}
 This uses inline code tags to generate some markdown.
 
-#### Output
-
-This is some `ScriptCs MarkdownDocument.Instance.InsertMarkdown("_italic_");` text.
-
 #### Code
-
 ```
 This is some `ScriptCs MarkdownDocument.Instance.InsertMarkdown("_italic_");` text.
 ```
 
 #### Output
-This is some `ScriptCs MarkdownDocument.Instance.InsertHtml("<em>italic</em>");` text.
+This is some `ScriptCs MarkdownDocument.Instance.InsertMarkdown("_italic_");` text.
 
 #### Code
 ```
 This is some `ScriptCs MarkdownDocument.Instance.InsertHtml("<em>italic</em>");` text.
 ```
+
+#### Output
+This is some `ScriptCs MarkdownDocument.Instance.InsertHtml("<em>italic</em>");` text.
 
 ## Exception Handling {.pb_before}
 This generates a ScriptCs exception by using invalid code.
 
-#### Output
-```ScriptCs
+#### Code
+```C#
 var fakeModel = new FakeModel { Title = "Test" };
 ```
 
-#### Code
-```C#
+#### Output
+```ScriptCs
 var fakeModel = new FakeModel { Title = "Test" };
 ```
 
@@ -83,49 +95,41 @@ Right{.text-center}
 ::::{.row}
 :::{.col-md-6}
 ```ScriptCs
-#load support.csx
 MarkdownDocument.Instance.InsertMarkdown("Left half{.text-center}");
 ```
 :::
 :::{.col-md-6}
 ```ScriptCs
-#load support.csx
 MarkdownDocument.Instance.InsertMarkdown("Right half{.text-center}");
 ```
 :::
 ::::
 
 ## OxyPlot {.pb_before}
-#### Output
-```ScriptCs
-#load support.csx
-var myModel = new PlotModel { Title = "Example 1" };
-myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
-var exporter = new SvgExporter { Width = 800, Height = 400 };
-MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
-```
 
 #### Code
 ```C#
-#load support.csx
+#r OxyPlot.dll
+#r System.Runtime.dll
+using OxyPlot;
+using OxyPlot.Series;
 var myModel = new PlotModel { Title = "Example 1" };
 myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
 var exporter = new SvgExporter { Width = 800, Height = 400 };
 MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ```
 
-### The content of `support.csx` {.pb_before}
-
-```
-#r Markdig.Extensions.ScriptCs.dll
+#### Output
+```ScriptCs
 #r OxyPlot.dll
 #r System.Runtime.dll
-using Markdig.Extensions.ScriptCs;
 using OxyPlot;
 using OxyPlot.Series;
+var myModel = new PlotModel { Title = "Example 1" };
+myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
+var exporter = new SvgExporter { Width = 800, Height = 400 };
+MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ```
-
-System.Runtime.dll is required for OxyPlot only.
 
 ## Ipsum Lorem {.pb_before}
 
@@ -164,6 +168,5 @@ Nunc at metus eleifend, luctus ligula eu, vehicula leo. Fusce ultrices dui at an
 #### DateTime.UtcNow
 The current UTC date-time is:
 ```ScriptCs
-#load support.csx
 MarkdownDocument.Instance.InsertHtml(DateTime.UtcNow.ToString());
 ```
