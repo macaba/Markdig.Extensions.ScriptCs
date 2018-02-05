@@ -86,7 +86,7 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 
 ## Separation of code from content
 
-It is possible to separate large amounts of code into `csx` files which will be pulled in automatically.
+It is possible to separate large amounts of code into `csx` files which can be referenced in the markdown.
 
 #### Markdown:
 ````
