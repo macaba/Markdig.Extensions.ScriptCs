@@ -82,7 +82,7 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ##### Output:
 ![./Images/oxyplot.svg](./Images/oxyplot.svg)
 
-(If the image looks badly rendered, that's a GitHub issue. Click the image to see what it's supposed to look like.)
+(If the image looks badly rendered, that's a [GitHub issue](https://github.com/github/markup/issues/1160). Click the image to see what it's supposed to look like.)
 
 ## Separation of code from content
 
