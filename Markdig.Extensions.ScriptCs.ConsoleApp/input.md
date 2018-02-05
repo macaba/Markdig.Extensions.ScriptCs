@@ -18,7 +18,7 @@ This only needs to be done once in your document.
 using Markdig.Extensions.ScriptCs;
 ```
 
-## Html
+## Html {.pb_before}
 This generates some simple HTML from ScriptCs
 
 #### Code
