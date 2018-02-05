@@ -88,7 +88,7 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 
 It is possible to separate large amounts of code into `csx` files which can be referenced in the markdown.
 
-#### Markdown:
+##### Markdown:
 ````
 ```ScriptCs
 #load OxyPlot.csx
@@ -96,7 +96,7 @@ RenderChart();
 ```
 ````
 
-### OxyPlot.csx:
+##### OxyPlot.csx:
 ```
 #r OxyPlot.dll
 #r System.Runtime.dll
