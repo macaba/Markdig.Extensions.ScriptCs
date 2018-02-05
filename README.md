@@ -112,6 +112,22 @@ public void RenderChart()
 }
 ```
 
+## Exception handling
+
+##### Markdown:
+
+````
+```ScriptCs
+var fakeModel = new FakeModel { Title = "Test" };
+```
+````
+
+##### Output:
+
+```
+ScriptCs exception:
+(1,21): error CS0246: The type or namespace name 'FakeModel' could not be found (are you missing a using directive or an assembly reference?)
+```
 
 ## More examples
 
