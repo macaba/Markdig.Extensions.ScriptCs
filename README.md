@@ -2,8 +2,6 @@
 
 This is an extension for Markdig that allows C# scripting to generate markdown or HTML content.
 
-[Here is an example printed to PDF](../Markdig.Extensions.ScriptCs.ConsoleApp/Example output/output.pdf)
-
 ## Prerequisites
 
 Instantiate the Markdig.Extensions.ScriptCs into the scripting runtime:
@@ -82,8 +80,6 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ````
 
 ##### Output:
-
-
 ![./Images/oxyplot.svg](./Images/oxyplot.svg)
 
 
