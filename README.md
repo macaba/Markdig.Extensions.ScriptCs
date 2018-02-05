@@ -4,7 +4,7 @@ This is an extension for Markdig that allows C# scripting to generate markdown o
 
 ## Prerequisites
 
-Instantiate the Markdig.Extensions.ScriptCs into the scripting runtime:
+Instantiate Markdig.Extensions.ScriptCs into the scripting runtime:
 
 ````C#
 ```ScriptCs
@@ -13,7 +13,7 @@ using Markdig.Extensions.ScriptCs;
 ```
 ````
 
-This only needs to be done once in your document.
+This only needs to be done once in your document. This gives access to `MarkdownDocument.Instance`.
 
 ## Inline
 
