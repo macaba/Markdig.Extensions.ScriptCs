@@ -82,5 +82,7 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ##### Output:
 ![./Images/oxyplot.svg](./Images/oxyplot.svg)
 
+## More examples
 
+https://github.com/macaba/Markdig.Extensions.ScriptCs/blob/master/Markdig.Extensions.ScriptCs.ConsoleApp/Example%20output/output.pdf
 
