@@ -95,15 +95,6 @@ MarkdownDocument.Instance.InsertMarkdown("Right half{.text-center}");
 :::
 ::::
 
-## Misc {.pb_before}
-
-#### DateTime.UtcNow
-The current UTC date-time is:
-```ScriptCs
-#load support.csx
-MarkdownDocument.Instance.InsertHtml(DateTime.UtcNow.ToString());
-```
-
 ## OxyPlot {.pb_before}
 #### Output
 ```ScriptCs
@@ -122,6 +113,19 @@ myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
 var exporter = new SvgExporter { Width = 800, Height = 400 };
 MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ```
+
+### The content of `support.csx` {.pb_before}
+
+```
+#r Markdig.Extensions.ScriptCs.dll
+#r OxyPlot.dll
+#r System.Runtime.dll
+using Markdig.Extensions.ScriptCs;
+using OxyPlot;
+using OxyPlot.Series;
+```
+
+System.Runtime.dll is required for OxyPlot only.
 
 ## Ipsum Lorem {.pb_before}
 
@@ -154,3 +158,12 @@ Donec efficitur sollicitudin pulvinar. Sed quis diam a nibh scelerisque luctus. 
 Nullam augue odio, facilisis in enim id, tincidunt dapibus metus. Quisque sed faucibus ex. Suspendisse lacus libero, porta sed metus vel, tempor mattis magna. Vivamus vulputate mi vel purus fringilla ultricies. Fusce vitae consequat odio, eu porttitor nulla. Nunc nec maximus massa. Praesent porttitor porta dignissim. Nunc lacinia tempus convallis.
 
 Nunc at metus eleifend, luctus ligula eu, vehicula leo. Fusce ultrices dui at ante laoreet auctor. Fusce non augue vel erat ultrices tristique a et sem. Pellentesque at elementum est. Quisque consectetur commodo metus, non molestie felis gravida a. Nam molestie feugiat aliquet. Pellentesque augue odio, tristique id arcu ac, rhoncus dapibus quam. Integer congue a lectus at congue. Donec accumsan elementum tempor. Praesent auctor bibendum ipsum quis ultricies. Pellentesque congue malesuada ligula, id mattis turpis ullamcorper pulvinar. Cras mi tellus, porttitor eu mauris eget, elementum dapibus nulla.
+
+## Misc {.pb_before}
+
+#### DateTime.UtcNow
+The current UTC date-time is:
+```ScriptCs
+#load support.csx
+MarkdownDocument.Instance.InsertHtml(DateTime.UtcNow.ToString());
+```

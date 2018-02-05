@@ -1,0 +1,44 @@
+﻿/* Page Breaks */
+
+/***Always insert a page break before the element***/
+.pb_before {
+    page-break-before: always !important;
+}
+
+/***Always insert a page break after the element***/
+.pb_after {
+    page-break-after: always !important;
+}
+
+/***Avoid page break before the element (if possible)***/
+.pb_before_avoid {
+    page-break-before: avoid !important;
+}
+
+/***Avoid page break after the element (if possible)***/
+.pb_after_avoid {
+    page-break-after: avoid !important;
+}
+
+/* Avoid page break inside the element (if possible) */
+.pbi_avoid {
+    page-break-inside: avoid !important;
+}
+
+h1,
+h2,
+h3 {
+  border-bottom: 2px solid #e8e8e8;
+  margin-bottom: 1.15rem;
+  padding-bottom: .5rem;
+  text-align: center;
+}
+
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+   overflow: hidden;
+}
