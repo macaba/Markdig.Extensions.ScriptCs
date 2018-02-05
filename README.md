@@ -85,4 +85,4 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ## More examples
 
 https://github.com/macaba/Markdig.Extensions.ScriptCs/blob/master/Markdig.Extensions.ScriptCs.ConsoleApp/Example%20output/output.pdf
-
+(This example was generated from input.md)
