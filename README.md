@@ -81,7 +81,7 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 
 ##### Output:
 
-<svg width="800" height="400" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<img src='data:image/svg+xml;utf8,<svg width="800" height="400" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
   <polyline points="56.8495,370.947 56.8495,374.947" style="fill:none;stroke:black;stroke-width:1"></polyline>
   <polyline points="71.7011,370.947 71.7011,374.947" style="fill:none;stroke:black;stroke-width:1"></polyline>
   <polyline points="86.5526,370.947 86.5526,374.947" style="fill:none;stroke:black;stroke-width:1"></polyline>
@@ -177,7 +177,7 @@ MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
   <polygon points="723.502,37.0795 784,37.0795 784,63.1325 723.502,63.1325" style="fill:none;stroke:none;"></polygon>
   <text dominant-baseline="hanging" text-anchor="start" transform="translate(751.502,45.0795)" font-family="Segoe UI" font-size="12" font-weight="400" fill="black">cos(x)</text>
   <polyline points="731.502,50.106 747.502,50.106" style="fill:none;stroke:rgb(78,154,6);stroke-width:2"></polyline>
-</svg>
+</svg>'>
 
 
 
