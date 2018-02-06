@@ -131,6 +131,11 @@ var exporter = new SvgExporter { Width = 800, Height = 400 };
 MarkdownDocument.Instance.InsertHtml(exporter.ExportToString(myModel));
 ```
 
+```ScriptCs
+#load OxyPlot.csx
+RenderChart();
+```
+
 ## Ipsum Lorem {.pb_before}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae fermentum dui. Morbi eu scelerisque ligula. Vivamus placerat erat urna, nec dictum lacus varius eu. Ut eu enim quis elit tempor congue quis eu tortor. Duis sed finibus erat. Curabitur venenatis, est quis consectetur porta, eros lacus gravida augue, vitae consequat nibh dui ut urna. Cras at orci quis felis congue volutpat non in mauris. Donec posuere risus felis, et egestas sapien ultrices in. Aliquam elementum imperdiet est, ullamcorper fermentum mauris imperdiet ornare.
