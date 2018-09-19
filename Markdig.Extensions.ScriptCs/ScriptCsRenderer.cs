@@ -29,33 +29,46 @@ namespace Markdig.Extensions.ScriptCs
                 {
                     var fullScript = script;
 
-                    var result = scriptExecutor.ExecuteScript(fullScript);
-                    if (result.CompileExceptionInfo != null)
+                    global::ScriptCs.Contracts.ScriptResult result = null;
+                    try
                     {
-                        renderer.Write(Markdown.ToHtml(BuildMarkdownExceptionMessage(result.CompileExceptionInfo.SourceException, options.ExceptionStackTrace), pipeline));
-                    }
-
-                    if (MarkdownDocument.Instance.ReportObject != null)
-                    {
-                        if (MarkdownDocument.Instance.ReportObject is HtmlReportObject)
+                        result = scriptExecutor.ExecuteScript(fullScript);
+                        if (result.CompileExceptionInfo != null)
                         {
-                            renderer.Write(((HtmlReportObject)MarkdownDocument.Instance.ReportObject).Html);
+                            renderer.Write(Markdown.ToHtml(BuildMarkdownExceptionMessage(result.CompileExceptionInfo.SourceException, options.ExceptionStackTrace), pipeline));
                         }
-                        else if (MarkdownDocument.Instance.ReportObject is MarkdownReportObject)
+
+                        if (MarkdownDocument.Instance.ReportObject != null)
                         {
-                            var markdown = Markdown.ToHtml(((MarkdownReportObject)MarkdownDocument.Instance.ReportObject).Markdown, pipeline);
-                            if (inline)
+                            if (MarkdownDocument.Instance.ReportObject is HtmlReportObject)
                             {
-                                if (markdown.StartsWith("<p>"))
-                                    markdown = markdown.Substring(3);
-                                if (markdown.EndsWith("</p>\n"))
-                                    markdown = markdown.Substring(0, markdown.Length - 5);
+                                renderer.Write(((HtmlReportObject)MarkdownDocument.Instance.ReportObject).Html);
                             }
+                            else if (MarkdownDocument.Instance.ReportObject is MarkdownReportObject)
+                            {
+                                var markdown = Markdown.ToHtml(((MarkdownReportObject)MarkdownDocument.Instance.ReportObject).Markdown, pipeline);
+                                if (inline)
+                                {
+                                    if (markdown.StartsWith("<p>"))
+                                        markdown = markdown.Substring(3);
+                                    if (markdown.EndsWith("</p>\n"))
+                                        markdown = markdown.Substring(0, markdown.Length - 5);
+                                }
 
-                            renderer.Write(markdown);
+                                renderer.Write(markdown);
+                            }
                         }
+                        MarkdownDocument.Instance.Reset();
                     }
-                    MarkdownDocument.Instance.Reset();
+                    catch (Exception exception)
+                    {
+                        Exception ex = exception;
+                        if (exception is System.IO.FileNotFoundException notFoundEx)
+                        {
+                            ex = new Exception($"{notFoundEx.Message} - {notFoundEx.FileName}");
+                        }
+                        renderer.Write(Markdown.ToHtml(BuildMarkdownExceptionMessage(ex, options.ExceptionStackTrace), pipeline));
+                    }
                 }
                 else
                 {

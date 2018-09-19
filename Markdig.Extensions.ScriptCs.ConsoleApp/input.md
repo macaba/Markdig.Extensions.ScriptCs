@@ -18,9 +18,23 @@ This only needs to be done once in your document.
 using Markdig.Extensions.ScriptCs;
 ```
 
+----
+
+## Refering to a not existing dll...
+
+**Note:**
+
+- Not.Existing.dll does not exist, but do not crash app :)
+- The next script will not display 'Missing ...' output (gives error message)
+
+```ScriptCs
+#r Not.Existing.dll
+MarkdownDocument.Instance.InsertMarkdown("Missing ...! This block will not run, but the others ok.");
+```
+
+
 ## Html {.pb_before}
 This generates some simple HTML from ScriptCs
-
 #### Code
 ```C#
 MarkdownDocument.Instance.InsertHtml("<p>Hello World!</p>");
