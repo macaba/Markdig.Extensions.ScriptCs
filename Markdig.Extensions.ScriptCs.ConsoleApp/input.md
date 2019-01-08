@@ -76,6 +76,20 @@ var fakeModel = new FakeModel { Title = "Test" };
 var fakeModel = new FakeModel { Title = "Test" };
 ```
 
+This generates an exception by referring to a missing DLL.
+
+#### Code
+```C#
+#r Missing.dll
+MarkdownDocument.Instance.InsertMarkdown("This code block will not complete, but subsequent ones will.");
+```
+
+#### Output
+```ScriptCs
+#r Missing.dll
+MarkdownDocument.Instance.InsertMarkdown("This code block will not complete, but subsequent ones will.");
+```
+
 ## Bootstrap Layout {.pb_before}
 
 #### Simple content

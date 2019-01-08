@@ -1,7 +1,9 @@
 ﻿using Markdig.Renderers;
 using ScriptCs;
+using ScriptCs.Contracts;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,34 +30,41 @@ namespace Markdig.Extensions.ScriptCs
                 if (renderer.EnableHtmlForInline || !inline)
                 {
                     var fullScript = script;
-
-                    var result = scriptExecutor.ExecuteScript(fullScript);
-                    if (result.CompileExceptionInfo != null)
+                    ScriptResult result = null;
+                    try
                     {
-                        renderer.Write(Markdown.ToHtml(BuildMarkdownExceptionMessage(result.CompileExceptionInfo.SourceException, options.ExceptionStackTrace), pipeline));
-                    }
-
-                    if (MarkdownDocument.Instance.ReportObject != null)
-                    {
-                        if (MarkdownDocument.Instance.ReportObject is HtmlReportObject)
+                        result = scriptExecutor.ExecuteScript(fullScript);
+                        if (result.CompileExceptionInfo != null)
                         {
-                            renderer.Write(((HtmlReportObject)MarkdownDocument.Instance.ReportObject).Html);
+                            renderer.Write(Markdown.ToHtml(BuildMarkdownExceptionMessage(result.CompileExceptionInfo.SourceException, options.ExceptionStackTrace), pipeline));
                         }
-                        else if (MarkdownDocument.Instance.ReportObject is MarkdownReportObject)
+
+                        if (MarkdownDocument.Instance.ReportObject != null)
                         {
-                            var markdown = Markdown.ToHtml(((MarkdownReportObject)MarkdownDocument.Instance.ReportObject).Markdown, pipeline);
-                            if (inline)
+                            if (MarkdownDocument.Instance.ReportObject is HtmlReportObject)
                             {
-                                if (markdown.StartsWith("<p>"))
-                                    markdown = markdown.Substring(3);
-                                if (markdown.EndsWith("</p>\n"))
-                                    markdown = markdown.Substring(0, markdown.Length - 5);
+                                renderer.Write(((HtmlReportObject)MarkdownDocument.Instance.ReportObject).Html);
                             }
+                            else if (MarkdownDocument.Instance.ReportObject is MarkdownReportObject)
+                            {
+                                var markdown = Markdown.ToHtml(((MarkdownReportObject)MarkdownDocument.Instance.ReportObject).Markdown, pipeline);
+                                if (inline)
+                                {
+                                    if (markdown.StartsWith("<p>"))
+                                        markdown = markdown.Substring(3);
+                                    if (markdown.EndsWith("</p>\n"))
+                                        markdown = markdown.Substring(0, markdown.Length - 5);
+                                }
 
-                            renderer.Write(markdown);
+                                renderer.Write(markdown);
+                            }
                         }
+                        MarkdownDocument.Instance.Reset();
                     }
-                    MarkdownDocument.Instance.Reset();
+                    catch (Exception ex)
+                    {
+                        renderer.Write(Markdown.ToHtml(BuildMarkdownExceptionMessage(ex, options.ExceptionStackTrace), pipeline));
+                    }
                 }
                 else
                 {
@@ -67,6 +76,10 @@ namespace Markdig.Extensions.ScriptCs
         public string BuildMarkdownExceptionMessage(Exception exception, bool stackTrace)
         {
             string message = "```" + Environment.NewLine + "ScriptCs exception:" + Environment.NewLine + exception.Message;
+            if (exception is FileNotFoundException)
+            {
+                message += " (" + ((FileNotFoundException)exception).FileName + ")";
+            }
             if (stackTrace)
             {
                 message = message + Environment.NewLine;
